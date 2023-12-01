@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:green_culture_meter/constants.dart';
+import 'package:green_culture_meter/controllers/data_controller.dart';
 import 'package:green_culture_meter/screens/quiz/quiz_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+  final DataController _dataController = Get.put(DataController());
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
+  final TextEditingController educationController = TextEditingController();
+  final TextEditingController workUnitController = TextEditingController();
+  final TextEditingController positionController = TextEditingController();
+  final TextEditingController workPeriodController = TextEditingController();
+
+  WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +42,9 @@ class WelcomeScreen extends StatelessWidget {
                 ),
 
                 // Text fields
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
                     hintText: "Nama",
@@ -44,8 +56,9 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: ageController,
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
                     hintText: "Usia",
@@ -58,8 +71,9 @@ class WelcomeScreen extends StatelessWidget {
                   height: 10,
                 ),
 
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: genderController,
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
                     hintText: "Jenis Kelamin",
@@ -72,8 +86,9 @@ class WelcomeScreen extends StatelessWidget {
                   height: 10,
                 ),
 
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: educationController,
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
                     hintText: "Pendidikan",
@@ -86,8 +101,9 @@ class WelcomeScreen extends StatelessWidget {
                   height: 10,
                 ),
 
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: workUnitController,
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
                     hintText: "Unit Kerja",
@@ -100,8 +116,9 @@ class WelcomeScreen extends StatelessWidget {
                   height: 10,
                 ),
 
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: positionController,
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
                     hintText: "Jabatan",
@@ -114,8 +131,9 @@ class WelcomeScreen extends StatelessWidget {
                   height: 10,
                 ),
 
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: workPeriodController,
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
                     hintText: "Masa Kerja",
@@ -130,7 +148,18 @@ class WelcomeScreen extends StatelessWidget {
 
                 // Button
                 InkWell(
-                  onTap: () => Get.to(const QuizScreen()),
+                  onTap: () {
+                    _dataController.saveUserData(
+                      name: nameController.text,
+                      age: ageController.text,
+                      gender: genderController.text,
+                      education: educationController.text,
+                      workUnit: workUnitController.text,
+                      position: positionController.text,
+                      workPeriod: workPeriodController.text,
+                    );
+                    Get.to(QuizScreen());
+                  },
                   child: Container(
                     width: double.infinity,
                     alignment: Alignment.center,

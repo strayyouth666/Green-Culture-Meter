@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:green_culture_meter/constants.dart';
+import 'dart:ui';
 
-import '../quiz/quiz_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:green_culture_meter/controllers/data_controller.dart';
 
 class ScoreScreen extends StatelessWidget {
   final int totalPoints;
@@ -12,52 +11,102 @@ class ScoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          SvgPicture.asset("assets/icons/bg.svg", fit: BoxFit.fill),
-          Column(
+    return GetBuilder<DataController>(
+      builder: (dataController) {
+        String userName =
+            dataController.name.value; // Get user name from data controller
+
+        return Scaffold(
+          body: Stack(
+            fit: StackFit.expand,
             children: [
-              const Spacer(flex: 3),
-              Text(
-                "Score",
-                style: Theme.of(context)
-                    .textTheme
-                    .displaySmall!
-                    .copyWith(color: kSecondaryColor),
+              Container(
+                color: Colors.blue, // Change the background color here
               ),
-              const Spacer(),
-              Text(
-                "$totalPoints Points",
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(color: kSecondaryColor),
+              Column(
+                children: [
+                  const Spacer(flex: 3),
+                  Text(
+                    "Score",
+                    style: Theme.of(context)
+                        .textTheme
+                        .displaySmall!
+                        .copyWith(color: Colors.white), // Change text color
+                  ),
+                  const Spacer(),
+                  Text(
+                    "$totalPoints Points",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium!
+                        .copyWith(color: Colors.white), // Change text color
+                  ),
+                  const Spacer(flex: 3),
+                ],
               ),
-              const Spacer(flex: 3),
-              InkWell(
-                  onTap: () => Get.to(const QuizScreen()),
-                  child: Container(
-                    width: double.infinity,
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(kDefaultPadding * 0.75),
-                    decoration: const BoxDecoration(
-                      gradient: kPrimaryGradient,
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    child: Text(
-                      "Let's Start Quiz",
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Colors.black,
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Colors.white
+                          .withOpacity(0.5), // Adjust opacity as needed
+                      child: Stack(
+                        children: [
+                          BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.2),
+                              ),
+                            ),
                           ),
+                          Column(children: [
+                            const Text(
+                              "Congratulation",
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              userName,
+                              style: const TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const Text(
+                              "Telah menyelesaikan Quiz Green Culture Meter dengan skor & predikat :",
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              "$totalPoints",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium!
+                                  .copyWith(color: Colors.white),
+                            ),
+                          ]),
+                        ],
+                      ),
                     ),
                   ),
                 ),
+              ),
             ],
-          )
-        ],
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:green_culture_meter/models/Questions_Lists.dart';
 import 'package:green_culture_meter/screens/score/score_screen.dart';
 
-class QuestionController extends GetxController with GetSingleTickerProviderStateMixin {
+class QuestionController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation _animation;
   Animation get animation => _animation;
@@ -130,16 +131,16 @@ class QuestionController extends GetxController with GetSingleTickerProviderStat
   }
 
   void nextQuestion() {
-    if (_questionNumber.value != _questions.length) {
-      _isAnswered = false;
-      _totalPoints = calculateTotalPoints();
+    _isAnswered = false;
+    _totalPoints = calculateTotalPoints();
 
-      _pageController.nextPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.ease);
+    _pageController.nextPage(
+        duration: const Duration(milliseconds: 250), curve: Curves.ease);
 
-      _animationController.reset();
-      _animationController.forward().whenComplete(nextQuestion);
-    } else {
+    _animationController.reset();
+    _animationController.forward().whenComplete(nextQuestion);
+
+    if (_questionNumber.value == _questions.length) {
       navigateToScoreScreen();
     }
   }
