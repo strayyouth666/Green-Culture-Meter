@@ -15,7 +15,7 @@ class QuestionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
+    QuestionController controller = Get.put(QuestionController());
     return SingleChildScrollView(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
@@ -36,21 +36,34 @@ class QuestionCard extends StatelessWidget {
             const SizedBox(height: kDefaultPadding / 2),
             ...List.generate(
               question.options.length,
-              (index) => Option(
-                questionIndex: question.id, // Pass the question's index
-                optionIndex: index,
-                text: question.options[index],
-                press: () => _controller.selectOption(question.id, index),
-              ),
+              (index) {
+                final uniqueKey = GlobalKey();
+                return Option(
+                  key: uniqueKey,
+                  questionIndex: question.id,
+                  optionIndex: index,
+                  text: question.options[index],
+                  press: () => controller.selectOption(question.id, index),
+                );
+              },
             ),
             const SizedBox(
               height: 10,
             ),
             ElevatedButton(
               onPressed: () {
-                _controller.previousQuestion();
+                controller.nextQuestion();
               },
-              child: Text("Back"),
+              child: const Text("Next"),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                controller.previousQuestion();
+              },
+              child: const Text("Back"),
             )
           ],
         ),

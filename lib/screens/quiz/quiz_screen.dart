@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'components/body.dart';
 
 class QuizScreen extends StatelessWidget {
+  const QuizScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +15,8 @@ class QuizScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           // ElevatedButton(
-          //     onPressed: _controller.nextQuestion, child: Text("Skip")),
+          //     onPressed: () => controller.nextQuestion(),
+          //     child: const Text("Skip")),
         ],
       ),
       body: Body(

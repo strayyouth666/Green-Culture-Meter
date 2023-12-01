@@ -15,7 +15,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // So that we have acccess our controller
-    QuestionController _questionController = Get.put(QuestionController());
+    QuestionController questionController = Get.put(QuestionController());
     return Stack(
       children: [
         SvgPicture.asset("assets/icons/bg.svg", fit: BoxFit.fill),
@@ -37,14 +37,14 @@ class Body extends StatelessWidget {
                 child: Obx(
                   () => Text.rich(
                     TextSpan(
-                      text: "${_questionController.questionNumber} ",
+                      text: "${questionController.questionNumber} ",
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium!
                           .copyWith(color: kSecondaryColor),
                       children: [
                         TextSpan(
-                          text: "/${_questionController.questions.length}",
+                          text: "/${questionController.questions.length}",
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall!
@@ -61,11 +61,11 @@ class Body extends StatelessWidget {
                 child: PageView.builder(
                   // Block swipe to next qn
                   physics: const NeverScrollableScrollPhysics(),
-                  controller: _questionController.pageController,
-                  onPageChanged: _questionController.updateTheQnNum,
-                  itemCount: _questionController.questions.length,
+                  controller: questionController.pageController,
+                  onPageChanged: questionController.updateTheQnNum,
+                  itemCount: questionController.questions.length,
                   itemBuilder: (context, index) => QuestionCard(
-                    question: _questionController.questions[index],
+                    question: questionController.questions[index],
                     key: UniqueKey(),
                   ),
                 ),

@@ -60,7 +60,7 @@ const List sample_data = [
   },
   {
     "part": "Coorporate Social Responsibility",
-    "id": 1,
+    "id": 6,
     "question":
         "Perusahaan kami bertanggung jawab terhadap lingkungan dalam aktivitas operasionalnya.",
     "options": [
@@ -74,7 +74,7 @@ const List sample_data = [
   },
   {
     "part": "Coorporate Social Responsibility",
-    "id": 2,
+    "id": 7,
     "question":
         "Perusahaan kami menerapkan program khusus untuk meminimalkan dampaknya terhadap lingkungan alam.",
     "options": [
@@ -88,7 +88,7 @@ const List sample_data = [
   },
   {
     "part": "Coorporate Social Responsibility",
-    "id": 3,
+    "id": 8,
     "question":
         "Perusahaan kami berpartisipasi dalam kegiatan yang bertujuan untuk melindungi dan meningkatkan kualitas lingkungan alam.",
     "options": [
@@ -102,7 +102,7 @@ const List sample_data = [
   },
   {
     "part": "Coorporate Social Responsibility",
-    "id": 4,
+    "id": 9,
     "question":
         "Perusahaan kami memiliki fasilitas yang diperlukan untuk mengurangi dampak negatif terhadap lingkungan sekitar",
     "options": [
@@ -116,7 +116,7 @@ const List sample_data = [
   },
   {
     "part": "Coorporate Social Responsibility",
-    "id": 5,
+    "id": 10,
     "question":
         "Perusahaan kami melakukan investasi yang terencana dengan baik untuk menghindari degradasi lingkungan sekitar.",
     "options": [
@@ -130,7 +130,7 @@ const List sample_data = [
   },
   {
     "part": "Environmental Knowledge",
-    "id": 1,
+    "id": 11,
     "question": "Saya mengetahui banyak tentang produk dan sampah daur ulang.",
     "options": [
       'Sangat Setuju',
@@ -143,7 +143,7 @@ const List sample_data = [
   },
   {
     "part": "Environmental Knowledge",
-    "id": 2,
+    "id": 12,
     "question": "Saya memahami istilah dan simbol terkait lingkungan.",
     "options": [
       'Sangat Setuju',
@@ -156,7 +156,7 @@ const List sample_data = [
   },
   {
     "part": "Environmental Knowledge",
-    "id": 3,
+    "id": 13,
     "question":
         "Saya mengetahui bagaimana memilih produk yang dapat mengurangi jumlah sampah.",
     "options": [
@@ -170,7 +170,7 @@ const List sample_data = [
   },
   {
     "part": "Environmental Knowledge",
-    "id": 4,
+    "id": 14,
     "question":
         "Menggunakan produk ramah lingkungan adalah salah satu langkah saya untuk mengurangi polusi.",
     "options": [
@@ -184,7 +184,7 @@ const List sample_data = [
   },
   {
     "part": "Environmental Knowledge",
-    "id": 5,
+    "id": 15,
     "question":
         "Saya mengetahui masalah lingkungan yang disebabkan oleh Perusahaan.",
     "options": [
@@ -198,7 +198,7 @@ const List sample_data = [
   },
   {
     "part": "Environmental Knowledge",
-    "id": 6,
+    "id": 16,
     "question":
         "Saya mengetahui cara-cara yang dapat dilakukan untuk menjaga lingkungan sekitar/meminimalisir dampak dari kerusakan yang disebabkan oleh Perusahaan.",
     "options": [
@@ -212,7 +212,7 @@ const List sample_data = [
   },
   {
     "part": "Ethical Leadership",
-    "id": 1,
+    "id": 17,
     "question":
         "Pimpinan Unit Kerja hingga Pimpinan puncak mendisiplinkan karyawan yang melanggar standar dan kode etik.",
     "options": ['Selalu', 'Sering', 'Kadang-kadang', 'Pernah', 'Tidak Pernah'],
@@ -220,7 +220,7 @@ const List sample_data = [
   },
   {
     "part": "Ethical Leadership",
-    "id": 2,
+    "id": 18,
     "question":
         "Pimpinan Unit Kerja hingga Pimpinan puncak menjalani kehidupan dan aktivitas dalam lingkungan kerja dengan berpegang teguh pada norma dan etika yang disepakati bersama.",
     "options": ['Selalu', 'Sering', 'Kadang-kadang', 'Pernah', 'Tidak Pernah'],
@@ -228,7 +228,7 @@ const List sample_data = [
   },
   {
     "part": "Ethical Leadership",
-    "id": 3,
+    "id": 19,
     "question":
         "Pimpinan Unit Kerja hingga Pimpinan puncak membahas etika dan atau nilai bisnis Perusahaan dengan karyawan.",
     "options": ['Selalu', 'Sering', 'Kadang-kadang', 'Pernah', 'Tidak Pernah'],
@@ -236,7 +236,7 @@ const List sample_data = [
   },
   {
     "part": "Ethical Leadership",
-    "id": 4,
+    "id": 20,
     "question":
         "Pimpinan memberikan contoh bagaimana melakukan sesuatu dengan benar  sesuai dengan norma dan etika yang berlaku dan disepakati bersama.",
     "options": ['Selalu', 'Sering', 'Kadang-kadang', 'Pernah', 'Tidak Pernah'],
@@ -244,7 +244,7 @@ const List sample_data = [
   },
   {
     "part": "Employee Wellbeing",
-    "id": 1,
+    "id": 21,
     "question":
         "Saya merasa cukup puas dengan tanggung jawab dan pekerjaan saya saat ini.",
     "options": ['Selalu', 'Sering', 'Kadang-kadang', 'Pernah', 'Tidak Pernah'],
@@ -252,14 +252,14 @@ const List sample_data = [
   },
   {
     "part": "Employee Wellbeing",
-    "id": 2,
+    "id": 22,
     "question": "Lingkungan kerja saya sangat kondusif.",
     "options": ['Selalu', 'Sering', 'Kadang-kadang', 'Pernah', 'Tidak Pernah'],
     "point_value": [5, 4, 3, 2, 1],
   },
   {
     "part": "Employee Wellbeing",
-    "id": 3,
+    "id": 23,
     "question":
         "Saya selalu dapat menemukan cara untuk meningkatkan kualitas pekerjaan saya dan membuat pekerjaan saya menjadi semakin baik.",
     "options": ['Selalu', 'Sering', 'Kadang-kadang', 'Pernah', 'Tidak Pernah'],

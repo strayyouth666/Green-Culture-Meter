@@ -3,15 +3,14 @@ import 'package:get/get.dart';
 import 'package:green_culture_meter/models/Questions_Lists.dart';
 import 'package:green_culture_meter/screens/score/score_screen.dart';
 
-class QuestionController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+class QuestionController extends GetxController with GetSingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation _animation;
-  Animation get animation => this._animation;
+  Animation get animation => _animation;
   late PageController _pageController;
-  PageController get pageController => this._pageController;
+  PageController get pageController => _pageController;
 
-  List<Question> _questions = sample_data
+  final List<Question> _questions = sample_data
       .map(
         (question) => Question(
           part: question['part'],
@@ -24,13 +23,13 @@ class QuestionController extends GetxController
       )
       .toList();
 
-  List<Question> get questions => this._questions;
+  List<Question> get questions => _questions;
 
   Map<int, int> selectedAnswers = {};
   Map<int, List<int>> selectedOptions = {};
 
   bool _isAnswered = false;
-  bool get isAnswered => this._isAnswered;
+  bool get isAnswered => _isAnswered;
 
   bool isOptionSelected(int questionIndex, int optionIndex) {
     return selectedOptions.containsKey(questionIndex) &&
@@ -41,22 +40,16 @@ class QuestionController extends GetxController
     return selectedAnswers.containsKey(questionIndex);
   }
 
-  late int _selectedQuestionIndex; // Track the current question index
-  int get selectedQuestionIndex => this._selectedQuestionIndex;
-
-  late int _selectedAnswerIndex; // Track the selected answer index
-  int get selectedAnswerIndex => this._selectedAnswerIndex;
-
-  RxInt _questionNumber = 1.obs;
-  RxInt get questionNumber => this._questionNumber;
+  final RxInt _questionNumber = 1.obs;
+  RxInt get questionNumber => _questionNumber;
 
   int _totalPoints = 0;
-  int get totalPoints => this._totalPoints;
+  int get totalPoints => _totalPoints;
 
   @override
   void onInit() {
     _animationController =
-        AnimationController(duration: Duration(seconds: 60), vsync: this);
+        AnimationController(duration: const Duration(seconds: 60), vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
       ..addListener(() {
         update();
@@ -76,45 +69,53 @@ class QuestionController extends GetxController
 
   int calculateTotalPoints() {
     int total = 0;
+
+    if (_questions.isEmpty) {
+      print('Questions list is empty!');
+    }
+
+    if (selectedAnswers.isEmpty) {
+      print('No selected answers yet!');
+    }
+
     for (int i = 0; i < _questions.length; i++) {
       if (selectedAnswers.containsKey(i)) {
         int answerIndex = selectedAnswers[i]!;
+        print('Question $i Answer Index: $answerIndex');
+        print(
+            'Question $i Point Value: ${_questions[i].pointValue[answerIndex]}');
+
         total += _questions[i].pointValue[answerIndex];
+        print('Total after Question $i: $total');
       }
     }
+
+    print('Final Total Points: $total');
     return total;
   }
 
-  // Add a method to select or deselect an option
-  // Add a method to toggle an answer option
-  void toggleOption(int questionIndex, int optionIndex) {
-    if (selectedOptions.containsKey(questionIndex)) {
-      if (selectedOptions[questionIndex]!.contains(optionIndex)) {
-        selectedOptions[questionIndex]!.remove(optionIndex);
-      } else {
-        selectedOptions[questionIndex]!.add(optionIndex);
-      }
-    } else {
-      selectedOptions[questionIndex] = [optionIndex];
-    }
+  void selectOption(int questionIndex, int answerIndex) {
+    selectedAnswers[questionIndex] = answerIndex;
+    selectedOptions[questionIndex] = [answerIndex];
+    _totalPoints = calculateTotalPoints();
     update();
+    nextQuestion();
   }
 
-  // Add a method to select or deselect an option
-  void selectOption(int questionIndex, int optionIndex) {
-    if (selectedOptions.containsKey(questionIndex)) {
-      if (selectedOptions[questionIndex]!.contains(optionIndex)) {
-        selectedOptions[questionIndex]!.remove(optionIndex);
-      } else {
-        selectedOptions[questionIndex]!.add(optionIndex);
-      }
-    } else {
-      selectedOptions[questionIndex] = [optionIndex];
+  void checkAns(int selectedIndex) {
+    if (!_isAnswered) {
+      _isAnswered = true;
+      update();
     }
+
+    _animationController.stop();
     update();
+
+    Future.delayed(const Duration(milliseconds: 500), () {
+      nextQuestion();
+    });
   }
 
-  // Add a method to navigate to the previous question
   void previousQuestion() {
     if (_questionNumber.value > 1) {
       _questionNumber.value--; // Decrease the current question number.
@@ -128,44 +129,23 @@ class QuestionController extends GetxController
     }
   }
 
-  void selectAnswer(int questionIndex, int answerIndex) {
-    selectedAnswers[questionIndex] = answerIndex;
-    // Hitung total poin setelah jawaban dipilih
-    _totalPoints = calculateTotalPoints();
-    update();
-  }
-
-  void checkAns(int selectedIndex) {
-    if (!_isAnswered) {
-      _isAnswered = true;
-      _selectedAnswerIndex = selectedIndex;
-      update();
-    }
-
-    int? getSelectedAnswer(int questionIndex) {
-      return selectedAnswers[questionIndex];
-    }
-
-    _animationController.stop();
-    update();
-
-    Future.delayed(Duration(milliseconds: 500), () {
-      nextQuestion();
-    });
-  }
-
   void nextQuestion() {
     if (_questionNumber.value != _questions.length) {
       _isAnswered = false;
-      // Hitung total poin sebelum berpindah
       _totalPoints = calculateTotalPoints();
+
       _pageController.nextPage(
-          duration: Duration(milliseconds: 250), curve: Curves.ease);
+          duration: const Duration(milliseconds: 250), curve: Curves.ease);
+
       _animationController.reset();
       _animationController.forward().whenComplete(nextQuestion);
     } else {
-      Get.to(ScoreScreen(totalPoints: _totalPoints)); // Pass _totalPoints here
+      navigateToScoreScreen();
     }
+  }
+
+  void navigateToScoreScreen() {
+    Get.to(ScoreScreen(totalPoints: _totalPoints));
   }
 
   void updateTheQnNum(int index) {

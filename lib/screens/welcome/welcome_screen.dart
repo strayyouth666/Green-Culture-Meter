@@ -4,6 +4,8 @@ import 'package:green_culture_meter/constants.dart';
 import 'package:green_culture_meter/screens/quiz/quiz_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,7 +130,7 @@ class WelcomeScreen extends StatelessWidget {
 
                 // Button
                 InkWell(
-                  onTap: () => Get.to(QuizScreen()),
+                  onTap: () => Get.to(const QuizScreen()),
                   child: Container(
                     width: double.infinity,
                     alignment: Alignment.center,
