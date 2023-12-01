@@ -123,7 +123,7 @@ class QuestionController extends GetxController
       _isAnswered =
           false; // You may want to reset _isAnswered to false or as needed.
       _pageController.previousPage(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.ease,
       );
       // You may need to reset the animation or do other necessary tasks.

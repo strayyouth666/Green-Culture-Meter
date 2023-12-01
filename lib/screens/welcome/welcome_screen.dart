@@ -158,7 +158,7 @@ class WelcomeScreen extends StatelessWidget {
                       position: positionController.text,
                       workPeriod: workPeriodController.text,
                     );
-                    Get.to(QuizScreen());
+                    Get.to(const QuizScreen());
                   },
                   child: Container(
                     width: double.infinity,
