@@ -26,4 +26,14 @@ class DataController extends GetxController {
     this.position.value = position;
     this.workPeriod.value = workPeriod;
   }
+  
+  bool isAnyFieldEmpty() {
+    return name.value.isEmpty ||
+        age.value.isEmpty ||
+        gender.value.isEmpty ||
+        education.value.isEmpty ||
+        workUnit.value.isEmpty ||
+        position.value.isEmpty ||
+        workPeriod.value.isEmpty;
+  }
 }
