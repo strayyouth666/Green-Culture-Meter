@@ -158,7 +158,18 @@ class WelcomeScreen extends StatelessWidget {
                       position: positionController.text,
                       workPeriod: workPeriodController.text,
                     );
-                    Get.to(const QuizScreen());
+                    if (_dataController.isAnyFieldEmpty()) {
+                      Get.defaultDialog(
+                        title: "Data tidak lengkap",
+                        middleText: "Pastikan semua data terisi.",
+                        textConfirm: "OK",
+                        onConfirm: () {
+                          Get.back(); // Close the alert
+                        },
+                      );
+                    } else {
+                      Get.to(const QuizScreen());
+                    }
                   },
                   child: Container(
                     width: double.infinity,
