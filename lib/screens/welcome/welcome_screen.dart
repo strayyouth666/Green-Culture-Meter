@@ -28,7 +28,6 @@ class WelcomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // const SizedBox(height: 100), // You can use SizedBox for spacing
                 Text(
                   "Let's Play Quiz!",
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -41,7 +40,6 @@ class WelcomeScreen extends StatelessWidget {
                   height: 20,
                 ),
 
-                // Text fields
                 TextField(
                   controller: nameController,
                   decoration: const InputDecoration(
@@ -146,7 +144,6 @@ class WelcomeScreen extends StatelessWidget {
                   height: 20,
                 ),
 
-                // Button
                 InkWell(
                   onTap: () {
                     _dataController.saveUserData(
@@ -164,7 +161,7 @@ class WelcomeScreen extends StatelessWidget {
                         middleText: "Pastikan semua data terisi.",
                         textConfirm: "OK",
                         onConfirm: () {
-                          Get.back(); // Close the alert
+                          Get.back();
                         },
                       );
                     } else {
