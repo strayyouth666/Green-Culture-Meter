@@ -39,7 +39,6 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-
                 TextField(
                   controller: nameController,
                   decoration: const InputDecoration(
@@ -68,9 +67,15 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-
-                TextField(
-                  controller: genderController,
+                DropdownButtonFormField<String>(
+                  value: genderController.text.isNotEmpty
+                      ? genderController.text
+                      : null,
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      genderController.text = newValue;
+                    }
+                  },
                   decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
@@ -79,11 +84,17 @@ class WelcomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
                   ),
+                  items: <String>['Laki-Laki', 'Perempuan']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-
                 TextField(
                   controller: educationController,
                   decoration: const InputDecoration(
@@ -98,7 +109,6 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-
                 TextField(
                   controller: workUnitController,
                   decoration: const InputDecoration(
@@ -113,7 +123,6 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-
                 TextField(
                   controller: positionController,
                   decoration: const InputDecoration(
@@ -128,7 +137,6 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-
                 TextField(
                   controller: workPeriodController,
                   decoration: const InputDecoration(
@@ -143,7 +151,6 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-
                 InkWell(
                   onTap: () {
                     _dataController.saveUserData(
