@@ -4,36 +4,36 @@ class DataController extends GetxController {
   RxString name = ''.obs;
   RxString age = ''.obs;
   RxString gender = ''.obs;
-  RxString education = ''.obs;
-  RxString workUnit = ''.obs;
+  RxString nik = ''.obs;
   RxString position = ''.obs;
-  RxString workPeriod = ''.obs;
+  RxString department = ''.obs;
+  RxString compartment = ''.obs;
 
   void saveUserData({
     required String name,
     required String age,
     required String gender,
-    required String education,
-    required String workUnit,
+    required String nik,
     required String position,
-    required String workPeriod,
+    required String department,
+    required String compartment,
   }) {
     this.name.value = name;
     this.age.value = age;
     this.gender.value = gender;
-    this.education.value = education;
-    this.workUnit.value = workUnit;
+    this.nik.value = nik;
     this.position.value = position;
-    this.workPeriod.value = workPeriod;
+    this.department.value = department;
+    this.compartment.value = compartment;
   }
   
   bool isAnyFieldEmpty() {
     return name.value.isEmpty ||
         age.value.isEmpty ||
         gender.value.isEmpty ||
-        education.value.isEmpty ||
-        workUnit.value.isEmpty ||
+        nik.value.isEmpty ||
         position.value.isEmpty ||
-        workPeriod.value.isEmpty;
+        department.value.isEmpty ||
+        compartment.value.isEmpty;
   }
 }

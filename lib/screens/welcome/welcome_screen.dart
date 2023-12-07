@@ -10,10 +10,10 @@ class WelcomeScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
   final TextEditingController genderController = TextEditingController();
-  final TextEditingController educationController = TextEditingController();
-  final TextEditingController workUnitController = TextEditingController();
+  final TextEditingController nikController = TextEditingController();
   final TextEditingController positionController = TextEditingController();
-  final TextEditingController workPeriodController = TextEditingController();
+  final TextEditingController departmentController = TextEditingController();
+  final TextEditingController compartmentController = TextEditingController();
 
   WelcomeScreen({Key? key}) : super(key: key);
 
@@ -53,8 +53,15 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                TextField(
-                  controller: ageController,
+                DropdownButtonFormField<int>(
+                  value: ageController.text.isNotEmpty
+                      ? int.tryParse(ageController.text)
+                      : null,
+                  onChanged: (int? newValue) {
+                    if (newValue != null) {
+                      ageController.text = newValue.toString();
+                    }
+                  },
                   decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
@@ -63,6 +70,12 @@ class WelcomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
                   ),
+                  items: ages.map<DropdownMenuItem<int>>((int value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child: Text(value.toString()),
+                    );
+                  }).toList(),
                 ),
                 const SizedBox(
                   height: 10,
@@ -96,25 +109,11 @@ class WelcomeScreen extends StatelessWidget {
                   height: 10,
                 ),
                 TextField(
-                  controller: educationController,
+                  controller: nikController,
                   decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
-                    hintText: "Pendidikan",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: workUnitController,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Color(0xFF1C2341),
-                    hintText: "Unit Kerja",
+                    hintText: "NIK",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
@@ -137,12 +136,51 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                TextField(
-                  controller: workPeriodController,
+                DropdownButtonFormField<String>(
+                  value: departmentController.text.isNotEmpty
+                      ? departmentController.text
+                      : null,
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      departmentController.text = newValue;
+                    }
+                  },
                   decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color(0xFF1C2341),
-                    hintText: "Masa Kerja",
+                    hintText: "Department",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                  ),
+                  items:
+                      departments.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: SizedBox(
+                        width: 200,
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            value,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            softWrap: true,
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: compartmentController,
+                  decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Color(0xFF1C2341),
+                    hintText: "Kompartemen",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
@@ -157,10 +195,10 @@ class WelcomeScreen extends StatelessWidget {
                       name: nameController.text,
                       age: ageController.text,
                       gender: genderController.text,
-                      education: educationController.text,
-                      workUnit: workUnitController.text,
+                      nik: nikController.text,
+                      department: departmentController.text,
                       position: positionController.text,
-                      workPeriod: workPeriodController.text,
+                      compartment: compartmentController.text,
                     );
                     if (_dataController.isAnyFieldEmpty()) {
                       Get.defaultDialog(
@@ -199,3 +237,58 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
+
+List<String> departments = [
+  'Audit Keuangan & Umum',
+  'Audit Operasi & Produksi',
+  'Hukum',
+  'Administrasi Bisnis',
+  'Komunikasi Korporat',
+  'TKP & Manajemen Risiko',
+  'Project Agrosolution',
+  'Project Retail Management',
+  'Akuntansi Biaya',
+  'Keuangan',
+  'Pelaporan Keuangan & Manajemen',
+  'Anggaran',
+  'Portofolio Bisnis',
+  'Corporate Social Responsibility',
+  'Keamanan',
+  'Pelayanan Umum',
+  'Inovasi & Sistem Manajemen',
+  'Pengembangan SDM & Organisasi',
+  'Remunerasi & Hubungan Industrial',
+  'Pengadaan Barang',
+  'Pengadaan Jasa',
+  'Perencanaan & Penerimaan Barang/Jasa',
+  'Produksi I A',
+  'Produksi I B',
+  'Produksi II A',
+  'Produksi II B',
+  'Produksi III A',
+  'Produksi III B',
+  'Administrasi & Penjualan',
+  'Administrasi Pemasaran',
+  'Pengelolaan Mitra Produksi',
+  'Inspeksi Teknik Rotating',
+  'Inspeksi Teknik Statik',
+  'Perencanaan & Pengendalian TA',
+  'Perencanaan Strategi Pemeliharaan',
+  'Reliability',
+  'Bengkel & Fabrikasi',
+  'Pemeliharaan I',
+  'Pemeliharaan II',
+  'Pemeliharaan III',
+  'Teknik & Bisnis',
+  'Keselamatan & Kesehatan Kerja',
+  'Lingkungan',
+  'Perencanaan Produksi & Pengelolaan Energi',
+  'Proses & Pengendalian Kualitas',
+  'Pengembangan Korporat',
+  'Rancang Bangun',
+  'Riset',
+  'Pengelolaan Pelabuhan',
+  'Pergudangan',
+];
+
+List<int> ages = List.generate(53, (index) => index + 18);
