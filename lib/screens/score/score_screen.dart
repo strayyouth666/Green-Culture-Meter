@@ -14,6 +14,17 @@ class ScoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double threshold = totalPoints / 3;
+    String grade = '';
+
+    if (totalPoints >= threshold * 2) {
+      grade = 'Green Master';
+    } else if (totalPoints >= threshold) {
+      grade = 'Green Learner';
+    } else {
+      grade = 'Green Newbie';
+    }
+
     return GetBuilder<DataController>(
       builder: (dataController) {
         String userName = dataController.name.value;
@@ -42,7 +53,7 @@ class ScoreScreen extends StatelessWidget {
                             child: BackdropFilter(
                               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                               child: Container(
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white.withOpacity(0),
                               ),
                             ),
                           ),
@@ -79,6 +90,13 @@ class ScoreScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     "$totalPoints",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium!
+                                        .copyWith(color: Colors.white),
+                                  ),
+                                  Text(
+                                    grade,
                                     style: Theme.of(context)
                                         .textTheme
                                         .headlineMedium!
