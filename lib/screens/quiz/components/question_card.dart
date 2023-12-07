@@ -17,56 +17,108 @@ class QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     QuestionController controller = Get.put(QuestionController());
     return SingleChildScrollView(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        padding: const EdgeInsets.all(kDefaultPadding),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Column(
-          children: [
-            Text(
-              question.question,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: kBlackColor),
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              child: Text(
+                "Part: ${question.part}",
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(color: Colors.white),
+              ),
             ),
-            const SizedBox(height: kDefaultPadding / 2),
-            ...List.generate(
-              question.options.length,
-              (index) {
-                final uniqueKey = GlobalKey();
-                return Option(
-                  key: uniqueKey,
-                  questionIndex: question.id,
-                  optionIndex: index,
-                  text: question.options[index],
-                  press: () => controller.selectOption(question.id, index),
-                );
-              },
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+            padding: const EdgeInsets.all(kDefaultPadding),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
             ),
-            const SizedBox(
-              height: 10,
+            child: Column(
+              children: [
+                Text(
+                  question.question,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(color: kBlackColor),
+                ),
+                const SizedBox(height: kDefaultPadding / 2),
+                ...List.generate(
+                  question.options.length,
+                  (index) {
+                    final uniqueKey = GlobalKey();
+                    return Option(
+                      key: uniqueKey,
+                      questionIndex: question.id,
+                      optionIndex: index,
+                      text: question.options[index],
+                      press: () => controller.selectOption(question.id, index),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                controller.nextQuestion();
-              },
-              child: const Text("Next"),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  controller.previousQuestion();
+                },
+                icon: const Icon(Icons.fast_rewind),
+                label: Text('Kembali'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF858CA3),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+              ),
             ),
-            const SizedBox(
-              height: 10,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  controller.nextQuestion();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF729373),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Selanjutnya'),
+                    SizedBox(width: 8),
+                    Icon(Icons.fast_forward),
+                  ],
+                ),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                controller.previousQuestion();
-              },
-              child: const Text("Back"),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
