@@ -72,6 +72,11 @@ flutter:
       - asset: fonts/Inter-Regular.ttf
       - asset: fonts/Inter-Bold.ttf
         weight: 700
+  - family: Lato
+    fonts:
+      - asset: fonts/Lato-Regular.ttf
+      - asset: fonts/Lato-Bold.ttf
+        weight: 700
 
   # assets:
   #   - assets/images/

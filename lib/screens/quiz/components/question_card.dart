@@ -34,14 +34,14 @@ class QuestionCard extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             padding: const EdgeInsets.all(kDefaultPadding),
             decoration: BoxDecoration(
               color: const Color(0xFF1B1F31),
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(color: const Color(0xFFFFFEFE), width: 1),
             ),
             child: Column(
@@ -50,8 +50,12 @@ class QuestionCard extends StatelessWidget {
                   question.question,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: Colors.white,
-                        fontFamily: 'Inter',
+                        fontFamily: 'Lato',
+                        fontSize: 18,
                       ),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 const SizedBox(height: kDefaultPadding / 2),
                 ...List.generate(
@@ -59,8 +63,7 @@ class QuestionCard extends StatelessWidget {
                   (index) {
                     final uniqueKey = GlobalKey();
                     return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: kDefaultPadding / 2),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Option(
                         key: uniqueKey,
                         questionIndex: question.id,
@@ -147,6 +150,9 @@ class QuestionCard extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+          const SizedBox(
+            height: 30,
           ),
         ],
       ),

@@ -262,7 +262,6 @@ class WelcomeScreen extends StatelessWidget {
                       position: positionController.text,
                       compartment: compartmentController.text,
                     );
-                    Get.to(const QuizScreen());
                     if (_dataController.isAnyFieldEmpty()) {
                       Get.defaultDialog(
                         title: "Data tidak lengkap",

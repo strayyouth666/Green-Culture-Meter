@@ -30,14 +30,14 @@ class Option extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(
           isSelected ? Colors.green : const Color(0xFF2C2395),
         ),
-        minimumSize: MaterialStateProperty.all(const Size(double.infinity, 40)),
-        padding: MaterialStateProperty.all(const EdgeInsets.all(16.0)),
+        minimumSize: MaterialStateProperty.all(const Size(double.infinity, 20)),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(10.0)),
       ),
       child: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: 'Inter',
-          color: isSelected ? Colors.black : Colors.white,
+          color: Colors.white,
         ),
       ),
     );

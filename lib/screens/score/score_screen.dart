@@ -1,10 +1,11 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:green_culture_meter/constants.dart';
 import 'package:green_culture_meter/controllers/data_controller.dart';
 import 'package:green_culture_meter/controllers/question_controller.dart';
-import 'package:green_culture_meter/screens/quiz/quiz_screen.dart';
+import 'package:green_culture_meter/screens/welcome/welcome_screen.dart';
 
 class ScoreScreen extends StatelessWidget {
   final QuestionController questionController = Get.find<QuestionController>();
@@ -28,8 +29,11 @@ class ScoreScreen extends StatelessWidget {
     return GetBuilder<DataController>(
       builder: (dataController) {
         String userName = dataController.name.value;
+        String position = dataController.position.value;
+        String department = dataController.department.value;
+        String nik = dataController.nik.value;
         return Scaffold(
-          backgroundColor: Color(0xFFE9E7F1),
+          backgroundColor: const Color(0xFFE9E7F1),
           body: Center(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -38,16 +42,16 @@ class ScoreScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: double.infinity,
-                    height: 366,
+                    height: 540,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(10.0),
                       child: Stack(
                         children: [
                           Image.asset(
                             'assets/image1.png',
                             fit: BoxFit.cover,
                             width: double.infinity,
-                            height: 366,
+                            height: 540,
                           ),
                           Positioned.fill(
                             child: BackdropFilter(
@@ -67,40 +71,97 @@ class ScoreScreen extends StatelessWidget {
                                   const Text(
                                     "Congratulations",
                                     style: TextStyle(
-                                      fontSize: 20.0,
+                                      fontSize: 36.0,
+                                      fontFamily: "Lato",
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
+                                      fontStyle: FontStyle.italic,
                                     ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
                                   ),
                                   Text(
                                     userName,
+                                    textAlign: TextAlign.center,
                                     style: const TextStyle(
-                                      fontSize: 20.0,
+                                      fontSize: 24.0,
+                                      fontFamily: "Lato",
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    "sebagai $position",
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 20.0,
+                                      fontFamily: "Lato",
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    "dari $department",
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 20.0,
+                                      fontFamily: "Lato",
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    nik,
+                                    style: const TextStyle(
+                                      fontSize: 24.0,
+                                      fontFamily: "Lato",
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
                                   ),
                                   const Text(
                                     "Telah menyelesaikan Quiz Green Cultur Meter dengan skor & predikat :",
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      fontSize: 20.0,
+                                      fontSize: 16.0,
+                                      fontFamily: "Lato",
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ),
                                   ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
                                   Text(
                                     "$totalPoints",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium!
-                                        .copyWith(color: Colors.white),
+                                    style: const TextStyle(
+                                      fontSize: 64.0,
+                                      fontFamily: "Lato",
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
                                   ),
                                   Text(
                                     grade,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium!
-                                        .copyWith(color: Colors.white),
+                                    style: const TextStyle(
+                                      fontSize: 24.0,
+                                      fontFamily: "Lato",
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -110,15 +171,25 @@ class ScoreScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
                   SizedBox(
+                    height: 60,
                     width: double.infinity,
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        Get.to(const QuizScreen());
+                        Get.to(WelcomeScreen());
                       },
-                      icon: const Icon(Icons.refresh),
-                      label: const Text('Coba Lagi'),
+                      icon: const Icon(
+                        Icons.refresh,
+                        color: Colors.white,
+                      ),
+                      label: const Text(
+                        'Coba Lagi',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Inter',
+                        ),
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF729373),
                         shape: RoundedRectangleBorder(
