@@ -25,40 +25,50 @@ class QuestionCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
               child: Text(
                 "Part: ${question.part}",
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: Colors.white),
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Colors.white,
+                      fontFamily: 'Inter',
+                      fontSize: 14,
+                    ),
               ),
             ),
+          ),
+          const SizedBox(
+            height: 10,
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             padding: const EdgeInsets.all(kDefaultPadding),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(0xFF1B1F31),
               borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: const Color(0xFFFFFEFE), width: 1),
             ),
             child: Column(
               children: [
                 Text(
                   question.question,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(color: kBlackColor),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Colors.white,
+                        fontFamily: 'Inter',
+                      ),
                 ),
                 const SizedBox(height: kDefaultPadding / 2),
                 ...List.generate(
                   question.options.length,
                   (index) {
                     final uniqueKey = GlobalKey();
-                    return Option(
-                      key: uniqueKey,
-                      questionIndex: question.id,
-                      optionIndex: index,
-                      text: question.options[index],
-                      press: () => controller.selectOption(question.id, index),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: kDefaultPadding / 2),
+                      child: Option(
+                        key: uniqueKey,
+                        questionIndex: question.id,
+                        optionIndex: index,
+                        text: question.options[index],
+                        press: () =>
+                            controller.selectOption(question.id, index),
+                      ),
                     );
                   },
                 ),
@@ -69,18 +79,28 @@ class QuestionCard extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             child: SizedBox(
+              height: 60,
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () {
                   controller.previousQuestion();
                 },
-                icon: const Icon(Icons.fast_rewind),
-                label: Text('Kembali'),
+                icon: const Icon(
+                  Icons.fast_rewind,
+                  color: Colors.white,
+                ),
+                label: const Text(
+                  'Kembali',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Inter',
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF858CA3),
                   shape: RoundedRectangleBorder(
@@ -96,6 +116,7 @@ class QuestionCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             child: SizedBox(
+              height: 60,
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
@@ -110,9 +131,18 @@ class QuestionCard extends StatelessWidget {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Selanjutnya'),
+                    Text(
+                      'Selanjutnya',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Inter',
+                      ),
+                    ),
                     SizedBox(width: 8),
-                    Icon(Icons.fast_forward),
+                    Icon(
+                      Icons.fast_forward,
+                      color: Colors.white,
+                    ),
                   ],
                 ),
               ),

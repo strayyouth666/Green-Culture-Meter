@@ -8,17 +8,12 @@ class QuizScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF261D48),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        // Fluttter show the back button automatically
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: const [
-          // ElevatedButton(
-          //     onPressed: () => controller.nextQuestion(),
-          //     child: const Text("Skip")),
-        ],
-      ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          automaticallyImplyLeading: false),
       body: Body(
         key: UniqueKey(),
       ),

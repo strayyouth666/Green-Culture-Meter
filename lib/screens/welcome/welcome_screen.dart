@@ -20,22 +20,63 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFE9E7F1),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: kDefaultPadding, vertical: 100),
+                horizontal: kDefaultPadding, vertical: 50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Let's Play Quiz!",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.asset(
+                      'assets/logo.png',
+                      width: 150,
+                      height: 150,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                const Text("Enter your information below"),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text.rich(
+                  TextSpan(
+                    text: "Let's Play Quiz ",
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18.0,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Green Culture Meter',
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'Enter your information below',
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    color: Colors.black,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -43,8 +84,11 @@ class WelcomeScreen extends StatelessWidget {
                   controller: nameController,
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Color(0xFF1C2341),
+                    fillColor: Color(0xFF15296F),
                     hintText: "Nama",
+                    hintStyle: TextStyle(
+                      fontFamily: 'Inter',
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
@@ -64,8 +108,11 @@ class WelcomeScreen extends StatelessWidget {
                   },
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Color(0xFF1C2341),
+                    fillColor: Color(0xFF15296F),
                     hintText: "Usia",
+                    hintStyle: TextStyle(
+                      fontFamily: 'Inter',
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
@@ -91,8 +138,11 @@ class WelcomeScreen extends StatelessWidget {
                   },
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Color(0xFF1C2341),
+                    fillColor: Color(0xFF15296F),
                     hintText: "Jenis Kelamin",
+                    hintStyle: TextStyle(
+                      fontFamily: 'Inter',
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
@@ -112,8 +162,11 @@ class WelcomeScreen extends StatelessWidget {
                   controller: nikController,
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Color(0xFF1C2341),
+                    fillColor: Color(0xFF15296F),
                     hintText: "NIK",
+                    hintStyle: TextStyle(
+                      fontFamily: 'Inter',
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
@@ -126,8 +179,11 @@ class WelcomeScreen extends StatelessWidget {
                   controller: positionController,
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Color(0xFF1C2341),
+                    fillColor: Color(0xFF15296F),
                     hintText: "Jabatan",
+                    hintStyle: TextStyle(
+                      fontFamily: 'Inter',
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
@@ -147,8 +203,11 @@ class WelcomeScreen extends StatelessWidget {
                   },
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Color(0xFF1C2341),
+                    fillColor: Color(0xFF15296F),
                     hintText: "Department",
+                    hintStyle: TextStyle(
+                      fontFamily: 'Inter',
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
@@ -179,7 +238,10 @@ class WelcomeScreen extends StatelessWidget {
                   controller: compartmentController,
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Color(0xFF1C2341),
+                    hintStyle: TextStyle(
+                      fontFamily: 'Inter',
+                    ),
+                    fillColor: Color(0xFF15296F),
                     hintText: "Kompartemen",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -189,8 +251,8 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                InkWell(
-                  onTap: () {
+                ElevatedButton(
+                  onPressed: () {
                     _dataController.saveUserData(
                       name: nameController.text,
                       age: ageController.text,
@@ -200,6 +262,7 @@ class WelcomeScreen extends StatelessWidget {
                       position: positionController.text,
                       compartment: compartmentController.text,
                     );
+                    Get.to(const QuizScreen());
                     if (_dataController.isAnyFieldEmpty()) {
                       Get.defaultDialog(
                         title: "Data tidak lengkap",
@@ -213,19 +276,41 @@ class WelcomeScreen extends StatelessWidget {
                       Get.to(const QuizScreen());
                     }
                   },
-                  child: Container(
-                    width: double.infinity,
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(kDefaultPadding * 0.75),
-                    decoration: const BoxDecoration(
-                      gradient: kPrimaryGradient,
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Text(
-                      "Let's Start Quiz",
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Colors.black,
-                          ),
+                    elevation: 0,
+                    padding: EdgeInsets.zero,
+                  ),
+                  child: Ink(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xFFADC7AE),
+                          Color(0xFF6F905A),
+                          Color(0x6FF16F1F),
+                        ],
+                        stops: [0.0, 0.999, 1.0],
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Container(
+                      constraints: const BoxConstraints(
+                        minHeight: 60,
+                      ),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        "Let's Start Quiz",
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                 ),

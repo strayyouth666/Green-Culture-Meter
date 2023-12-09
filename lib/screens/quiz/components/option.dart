@@ -28,13 +28,16 @@ class Option extends StatelessWidget {
       },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(
-          isSelected ? Colors.green : Colors.white,
+          isSelected ? Colors.green : const Color(0xFF2C2395),
         ),
+        minimumSize: MaterialStateProperty.all(const Size(double.infinity, 40)),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(16.0)),
       ),
       child: Text(
         text,
         style: TextStyle(
-          color: isSelected ? Colors.white : Colors.black,
+          fontFamily: 'Inter',
+          color: isSelected ? Colors.black : Colors.white,
         ),
       ),
     );
