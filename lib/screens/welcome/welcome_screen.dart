@@ -45,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 const Text.rich(
                   TextSpan(
-                    text: "Let's Play Quiz ",
+                    text: "  Let's Play Quiz ",
                     style: TextStyle(
                       fontFamily: 'Inter',
                       color: Colors.black,
@@ -69,7 +69,7 @@ class WelcomeScreen extends StatelessWidget {
                   height: 10,
                 ),
                 const Text(
-                  'Enter your information below',
+                  '  Enter your information below',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: Colors.black,
