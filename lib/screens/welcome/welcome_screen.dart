@@ -13,7 +13,6 @@ class WelcomeScreen extends StatelessWidget {
   final TextEditingController nikController = TextEditingController();
   final TextEditingController positionController = TextEditingController();
   final TextEditingController departmentController = TextEditingController();
-  final TextEditingController compartmentController = TextEditingController();
 
   WelcomeScreen({Key? key}) : super(key: key);
 
@@ -232,23 +231,6 @@ class WelcomeScreen extends StatelessWidget {
                   }).toList(),
                 ),
                 const SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: compartmentController,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    hintStyle: TextStyle(
-                      fontFamily: 'Inter',
-                    ),
-                    fillColor: Color(0xFF15296F),
-                    hintText: "Kompartemen",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
-                ),
-                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
@@ -260,7 +242,6 @@ class WelcomeScreen extends StatelessWidget {
                       nik: nikController.text,
                       department: departmentController.text,
                       position: positionController.text,
-                      compartment: compartmentController.text,
                     );
                     if (_dataController.isAnyFieldEmpty()) {
                       Get.defaultDialog(

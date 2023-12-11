@@ -71,27 +71,12 @@ class QuestionController extends GetxController
   int calculateTotalPoints() {
     int total = 0;
 
-    if (_questions.isEmpty) {
-      print('Questions list is empty!');
-    }
-
-    if (selectedAnswers.isEmpty) {
-      print('No selected answers yet!');
-    }
-
     for (int i = 0; i < _questions.length; i++) {
       if (selectedAnswers.containsKey(i)) {
         int answerIndex = selectedAnswers[i]!;
-        print('Question $i Answer Index: $answerIndex');
-        print(
-            'Question $i Point Value: ${_questions[i].pointValue[answerIndex]}');
-
         total += _questions[i].pointValue[answerIndex];
-        print('Total after Question $i: $total');
       }
     }
-
-    print('Final Total Points: $total');
     return total;
   }
 
@@ -119,14 +104,12 @@ class QuestionController extends GetxController
 
   void previousQuestion() {
     if (_questionNumber.value > 1) {
-      _questionNumber.value--; // Decrease the current question number.
-      _isAnswered =
-          false; // You may want to reset _isAnswered to false or as needed.
+      _questionNumber.value--;
+      _isAnswered = false;
       _pageController.previousPage(
         duration: const Duration(milliseconds: 500),
         curve: Curves.ease,
       );
-      // You may need to reset the animation or do other necessary tasks.
     }
   }
 
