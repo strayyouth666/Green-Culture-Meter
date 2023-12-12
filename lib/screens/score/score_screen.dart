@@ -53,7 +53,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double threshold = widget.totalPoints / 3;
+    double threshold = 115 / 3;
     String grade = '';
 
     if (widget.totalPoints >= threshold * 2) {
@@ -70,6 +70,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
         String position = dataController.position.value;
         String department = dataController.department.value;
         String nik = dataController.nik.value;
+        String gender = dataController.gender.value;
         return Scaffold(
           backgroundColor: const Color(0xFFE9E7F1),
           body: SingleChildScrollView(
@@ -93,7 +94,9 @@ class _ScoreScreenState extends State<ScoreScreen> {
                             child: Stack(
                               children: [
                                 Image.asset(
-                                  'assets/image1.png',
+                                  gender == 'Perempuan'
+                                      ? 'assets/image1.png'
+                                      : 'assets/image2.png',
                                   fit: BoxFit.cover,
                                   width: double.infinity,
                                   height: 540,
